@@ -26,6 +26,7 @@ ws.onmessage = ({ data }) => {
             break
 
         case 0:
+            console.log(d.content)
             break
             
         default:
