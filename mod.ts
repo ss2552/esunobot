@@ -66,6 +66,6 @@ ws.onclose = (event) => {
     console.log(`WebSocket closed: Code=${event.code}, Reason=${event.reason}`);
 }
 
-Deno.cron("up". {minute: {every: 2}}, () = {
+Deno.cron("up", {minute: {every: 2}}, () = {
     console.log("update");
 });
