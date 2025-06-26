@@ -1,6 +1,8 @@
 import { datetime } from "https://deno.land/x/ptera/mod.ts";
 
+console.log("開始")
 setInterval(() => {
+    console.log("イ")
     const time = datetime()
     console.log(time)
     fetch("https://discord.com/api/v10/channels/1206937013773930516/messages", {
@@ -11,7 +13,9 @@ setInterval(() => {
         "body": JSON.stringify({content: time}),
         "method": "POST"
     })
+    console.log("ロ")
 }, 111111)
+console.log("終了、")
 /*
 // deno-lint-ignore-file no-fallthrough
 import "https://deno.land/std@0.224.0/dotenv/load.ts";
