@@ -1,15 +1,17 @@
 import { datetime } from "https://deno.land/x/ptera/mod.ts";
 
-const time = datetime()
-console.log(time)
-fetch("https://discord.com/api/v10/channels/1206937013773930516/messages", {
-    "headers": {
-        "authorization": "Bot "+Deno.env.get("TOKEN"),
-        "Content-Type": "application/json"
-    },
-    "body": JSON.stringify({content: time}),
-    "method": "POST"
-})
+Deno.cron("up", {minute: {every: 1}}, () => {
+  　const time = datetime()
+    console.log(time)
+    fetch("https://discord.com/api/v10/channels/1206937013773930516/messages", {
+        "headers": {
+            "authorization": "Bot "+Deno.env.get("TOKEN"),
+            "Content-Type": "application/json"
+        },
+        "body": JSON.stringify({content: time}),
+        "method": "POST"
+    })
+});
 
 /*
 // deno-lint-ignore-file no-fallthrough
