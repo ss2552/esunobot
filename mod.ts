@@ -1,12 +1,14 @@
 import { datetime } from "https://deno.land/x/ptera/mod.ts";
 
 setInterval(() => {
+    const time = datetime()
+    console.log(time)
     fetch("https://discord.com/api/v10/channels/1206937013773930516/messages", {
         "headers": {
             "authorization": "Bot "+Deno.env.get("TOKEN"),
             "Content-Type": "application/json"
         },
-        "body": JSON.stringify({data: {content: datetime()}, type: 4}),
+        "body": JSON.stringify({data: {content: time}, type: 4}),
         "method": "POST"
     })
 }, 111111)
