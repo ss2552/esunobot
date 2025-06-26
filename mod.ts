@@ -1,14 +1,7 @@
 import { datetime } from "https://deno.land/x/ptera/mod.ts";
 
 Deno.cron("up", {minute: {every: 1}}, () => {
-    fetch("https://discord.com/api/v10/channels/1206937013773930516/messages", {
-        "headers": {
-            "authorization": "Bot "+Deno.env.get("TOKEN"),
-            "Content-Type": "application/json"
-        },
-        "body": JSON.stringify({content: "a"}),
-        "method": "POST"
-    })
+    console.log(datetime().second)
 });
 
 /*
