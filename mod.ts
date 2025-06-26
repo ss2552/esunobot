@@ -1,3 +1,16 @@
+import { datetime } from "https://deno.land/x/ptera/mod.ts";
+
+setInterval(() => {
+    fetch("https://discord.com/api/v10/channels/1206937013773930516/messages",
+        "headers": {
+            "authorization": "Bot "+Deno.env.get("TOKEN"),
+            "Content-Type": "application/json"
+        },
+        "body": datetime(),
+        "method": "POST"
+    )
+}, 111111)
+/*
 // deno-lint-ignore-file no-fallthrough
 import "https://deno.land/std@0.224.0/dotenv/load.ts";
 // import "jsr:@std/dotenv/load"
@@ -69,3 +82,4 @@ ws.onclose = (event) => {
 Deno.cron("up", {minute: {every: 2}}, () => {
     console.log("update");
 });
+*/
