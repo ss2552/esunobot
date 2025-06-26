@@ -6,7 +6,7 @@ setInterval(() => {
             "authorization": "Bot "+Deno.env.get("TOKEN"),
             "Content-Type": "application/json"
         },
-        "body": datetime(),
+        "body": JSON.stringify({date: {content: datetime()}}),
         "method": "POST"
     )
 }, 111111)
