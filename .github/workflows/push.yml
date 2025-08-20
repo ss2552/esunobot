@@ -11,8 +11,7 @@ permissions:
 jobs:
   push:
     name: Build and push Docker image
-    runs-on: ubuntu-latest
-    container: node/current-alpine
+    runs-on: alpine-latest
 
     steps:
           
