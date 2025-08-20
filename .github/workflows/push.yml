@@ -22,8 +22,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: esunobot.sakuracr.jp
-          username:  ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          username:  esu
+          password: EsuS2552
 
       - name: Build and push
         uses: docker/build-push-action@v6
