@@ -1,13 +1,11 @@
-name: デプロイ
+name: App Run β デプロイ
 
 on:
  push:
   branches: main
 
- workflow_dispatch:
-
 jobs:
-  docker_push:
+  build:
    runs-on: alpine-latest
    steps:
     - uses: actions/checkout@v4
