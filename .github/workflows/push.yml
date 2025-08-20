@@ -6,7 +6,7 @@ on:
 jobs:
   docker:
     runs-on: alpine-latest
-    components: node/current-alpine
+    container: node/current-alpine
 
     steps:
       - name: CheckOut
