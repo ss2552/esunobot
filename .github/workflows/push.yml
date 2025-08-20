@@ -2,6 +2,7 @@ name: App Run β デプロイ
 
 on:
   push:
+    branches: main
 
 jobs:
   docker:
