@@ -1,10 +1,10 @@
 name: デプロイ
 
 on:
-            push:
-                        branches: main
+ push:
+  branches: main
 
-            workflow_dispatch:
+ workflow_dispatch:
 
 jobs:
   docker_push:
