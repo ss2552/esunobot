@@ -1,9 +1,6 @@
 FROM alpine:latest
 
-COPY src/index.js package.json
+WORKDIR /app
+COPY image/ .
 
-RUN echo "開始"
-
-EXPOSE 80
-
-CMD [ "node", "src/index.js" ]
+CMD [ "sh", "-c", "ls && node app/src/index.js && ls app" ]
