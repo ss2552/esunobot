@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-WORKDIR /app
+WORKDIR /
 COPY image/ .
 
-CMD [ "sh", "-c", "ls && node app/src/index.js && ls app" ]
+CMD [ "node src/index.js" ]
