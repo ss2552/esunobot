@@ -35,6 +35,7 @@ jobs:
           -u ${{vars.SAKURA_ACCESS_TOKEN}}:${{secrets.SAKURA_ACCESS_TOKEN_SECRET}} \
           -H "Content-Type: application/json" \
           -d '{
+            "timeout_seconds": 10,
             "components": [
               {
                 "name": "esunobot",

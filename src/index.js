@@ -17,9 +17,7 @@ ws.onmessage = async function({data}){
             ws.send(JSON.stringify({op:1, d:null}))
         }, d.heartbeat_interval)
     }else if(op == 0&& t == "MESSAGE_CREATE"){
-        if(!d.user.bot)
-            return
-
+        console.log(d.content)
         if(d.content == "ぴんぐ"){
             await fetch("https://discord.com/api/v10/channels/"+d.channel_id+"/messages", {
                 "headers": {
@@ -42,7 +40,7 @@ ws.onopen = function(){
         "op": 2, 
         "d": {
           "token": token, 
-          "intents": (1 << 9),
+          "intents": (1 << 9) | (1 << 12),
           "properties": {
             "os": "linux",  
             "device": "docker"
@@ -52,10 +50,7 @@ ws.onopen = function(){
           "activities" : [
                 {
                   "state": "さくら", 
-                  "type": 4,
-                  "emoji": {
-                    "name": "😀"
-                  }
+                  "type": 0
                 }
         ],
   }}})
