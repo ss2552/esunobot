@@ -1,0 +1,29 @@
+{
+  "name": "esu",
+  "timeout_seconds": 300,
+  "port": 80,
+  "min_scale": 0,
+  "max_scale": 10,
+  "components": [
+    {
+      "name": "bot",
+      "max_cpu": 1,
+      "max_memory": "2Gi",
+      "deploy_source": {
+        "container_registry": {
+          "image": "bot",
+          "server": "esunobot.sakuracr.jp/alpine:latest",
+          "username": ${{ secrets.USERNAME }},
+          "password": ${{ secrets.PASSWORD }}
+        }
+      }
+      "env": [
+          {
+            "key": TOKEN,
+            "value":  ${{ secrets.TOKEN }}
+          }
+        ]
+      "probe": []
+    }
+  ]
+}

@@ -1,11 +1,7 @@
 name: App Run β デプロイ
 
 on:
-  push:
-    branches: 
-      - main
   workflow_dispatch:
-
 
 permissions:
   contents: read
@@ -20,14 +16,32 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: esunobot.sakuracr.jp
-          username:  ${{ secrets.USERNAME }}
+          username:  ${{ env.SAKURA_USERNAME }}
           password: ${{ secrets.PASSWORD }}
 
       - name: チェックアウト
         uses: actions/checkout@v4
 
-      - name: プッシュ
+      - name: Docker Imageのcreateとプッシュ
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: esunobot.sakuracr.jp/alpine:latest
+          tags: ${{env.SAKURA_REGISTRY}}/${{env.CONTAINER_NAME}}:${{env.CONTAINER_TAG}}
+
+# https://manual.sakura.ad.jp/api/cloud/apprun/#tag/アプリケーション/operation/postApplication
+      - name: AppRunβのデプロイ
+        run: |
+          curl
+          https://secure.sakura.ad.jp/cloud/api/apprun/1.0/apprun/api/applications/3c9f1ab1-b035-410a-9638-a8258825d375
+          - u ${{env.SAKURA_ACCESS_TOKEN}}:${{secrets.SAKURA_ACCESS_TOKEN_SECRET}}
+          -X PATCH
+          -d {
+            "components": [
+              {"name": "bot", "max_cpu": 1, "max_memory": "2Gi", "deploy_source": {
+                "container_registry": {
+                  "image": "${{env.SAKURA_REGISTRY}}/${{env.CONTAINER_NAME}}:${{env.CONTAINER_TAG}}","server": "${{secrets.SAKURA_REGISTRY}}","username": "${{ env.SAKURA_USERNAME }}","password": "${{ secrets.PASSWORD }}"}}, "env": [
+                    {"key": "TOKEN", "value":  "${{ secrets.DISCORD_TOKEN }}" }
+                  ]
+             }
+            ]
+          }

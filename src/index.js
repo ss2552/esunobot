@@ -4,6 +4,12 @@ await fetch("https://discord.com/api/webhooks/1407672039971623024/OSi9zlaxx1bUU4
   headers: {"Content-Type": "application/json"}, method: "POST", body: JSON.stringify({"content": "テスト実行"})
 })
 
+const token = process.env.TOKEN
+if(!token){
+  console.error("トークンがありません")
+  close()
+}
+
 const ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json")
 
 ws.onmessage = function({data}){
@@ -19,7 +25,7 @@ ws.onopen = function(){
   const data = JSON.stringify({
         "op": 2, 
         "d": {
-          "token": process.env.TOKEN, 
+          "token": token, 
           "intents": (1 << 9),
           "properties": {
             "os": "linux",  

@@ -1,6 +1,6 @@
 FROM alpine:latest
 
 WORKDIR /
-COPY image/ .
+COPY src/index.js package.json
 
-CMD [ "node src/index.js" ]
+CMD [ "ls && npm run start" ]
