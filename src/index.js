@@ -14,6 +14,7 @@ const ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json")
 
 ws.onmessage = async function({data}){
     const {op, d, s, t} = JSON.parse(data)
+    console.log(d.keys().join("\n"))
     if(op == 10){
         setInterval(_=>{
             ws.send(JSON.stringify({op:1, d:null}))
@@ -25,7 +26,11 @@ ws.onmessage = async function({data}){
                     "authorization": "Bot " + token,
                     "Content-Type": "application/json"
                 },
-                "body": d.content,
+                "body": JSON.stringify({content: d.content,
+                    message_reference: {
+                        type: 0,
+                        message_id: d.message.id
+                }}),
                 "method": "POST"
             })
         }
@@ -46,7 +51,7 @@ ws.onopen = function(){
           "status": "online", 
           "activities" : [
                 {
-                  "status": "さくら", 
+                  "state": "さくら", 
                   "type": 4,
                   "emoji": {
                     "name": "😀"
