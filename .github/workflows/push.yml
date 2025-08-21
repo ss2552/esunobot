@@ -43,7 +43,7 @@ jobs:
                 "deploy_source": {
                   "container_registry": {
                     "image": "${{vars.SAKURA_REGISTRY}}/${{vars.CONTAINER_NAME}}:${{vars.CONTAINER_TAG}}",
-                    "server": "${{vers.SAKURA_REGISTRY}}",
+                    "server": "${{vars.SAKURA_REGISTRY}}",
                     "username": "${{ vars.SAKURA_USERNAME }}",
                     "password": "${{ secrets.PASSWORD }}"
                   }
