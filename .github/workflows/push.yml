@@ -51,7 +51,8 @@ jobs:
                 },
                 "env": [
                   {"key": "TOKEN", "value": "${{ secrets.DISCORD_TOKEN }}"},
-                  {"key": "WEBHOOK", "value": "${{secrets.DISCORD_WEBHOOK}}"}
+                  {"key": "WEBHOOK", "value": "${{secrets.DISCORD_WEBHOOK}}"},
+                  {"key": "START_MSG", "value": "${{vars.DISCORD_WEBHOOK_START_MSG}}"}
                 ]
               }
             ]

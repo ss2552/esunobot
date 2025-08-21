@@ -1,5 +1,6 @@
+console.log(process.env.START_MSG)
 await fetch(process.env.WEBHOOK, {
-  headers: {"Content-Type": "application/json"}, method: "POST", body: JSON.stringify({"content": "開始"})
+  headers: {"Content-Type": "application/json"}, method: "POST", body: JSON.stringify({"content": process.env.START_MSG})
 })
 
 const token = process.env.TOKEN
@@ -11,10 +12,8 @@ if(!token){
 const ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json")
 
 ws.onmessage = async function({data}){
-    console.log(data.toString())
     const {op, d, s, t} = JSON.parse(data)
     if(op == 0&& t == "MESSAGE_CREATE"){
-        console.log(d.content)
         if(d.content == "ぴんぐ"){
             await fetch("https://discord.com/api/v10/channels/"+d.channel_id+"/messages", {
                 "headers": {
@@ -24,7 +23,7 @@ ws.onmessage = async function({data}){
                 "body": JSON.stringify({content: "ぽんぐ",
                     message_reference: {
                         type: 0,
-                        message_id: d.message.id
+                        message_id: d.id
                 }}),
                 "method": "POST"
             })
