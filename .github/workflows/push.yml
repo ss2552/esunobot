@@ -52,7 +52,10 @@ jobs:
                 "env": [
                   {"key": "TOKEN", "value": "${{ secrets.DISCORD_TOKEN }}"},
                   {"key": "WEBHOOK", "value": "${{secrets.DISCORD_WEBHOOK}}"},
-                  {"key": "START_MSG", "value": "${{vars.DISCORD_WEBHOOK_START_MSG}}"}
+                  {"key": "START_MSG", "value": "${{vars.DISCORD_WEBHOOK_START_MSG}}"},
+                  {"key": "APPLICATION_ID", "value": "${{vars.SAKURA_APPLICATION_ID}}"},
+                  {"key": "ACCESS_TOKEN", "value": "${{secrets.SAKURA_ACCESS_TOKEN}}"},
+                  {"key": "ACCESS_TOKEN_SECRET", "value": "${{secrets.SAKURA_ACCESS_TOKEN_SECRET}}"}
                 ]
               }
             ]

@@ -1,6 +1,6 @@
 console.log(process.env.START_MSG)
 await fetch(process.env.WEBHOOK, {
-  headers: {"Content-Type": "application/json"}, method: "POST", body: JSON.stringify({"content": process.env.START_MSG})
+  headers: {"Content-Type": "application/json"}, method: "POST", body: JSON.stringify({"content": process.env.START_MSG + " " + await get_status()})
 })
 
 const token = process.env.TOKEN
@@ -20,7 +20,7 @@ ws.onmessage = async function({data}){
                     "authorization": "Bot " + token,
                     "Content-Type": "application/json"
                 },
-                "body": JSON.stringify({content: "ぽんぐ",
+                "body": JSON.stringify({content: "ぽんぐ "+await get_status(),
                     message_reference: {
                         type: 0,
                         message_id: d.id
@@ -63,4 +63,13 @@ ws.onerror = function(err){
 
 ws.onclose = async function(){
     await fetch(process.env.WEBHOOK, {headers: {"Content-Type": "application/json"}, method: "POST", body: JSON.stringify({"content": "終了"})})
+}
+
+
+async function get_status() {
+    const {status, message} = await fetch("https://secure.sakura.ad.jp/cloud/api/apprun/1.0/apprun/api/applications/"+process.env.APPLICATION_ID+"/status", {
+        headers: {
+            authorization: "Basic "+btoa(process.env.ACCESS_TOKEN+":"+process.env.ACCESS_TOKEN_SECRET)
+    }}).then(async r=>await r.json())
+    return "\nstatus: "+status + "\nmessage: " + message
 }
