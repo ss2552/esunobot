@@ -11,12 +11,9 @@ if(!token){
 const ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json")
 
 ws.onmessage = async function({data}){
+    console.log(data.toString())
     const {op, d, s, t} = JSON.parse(data)
-    if(op == 10){
-        setInterval(_=>{
-            ws.send(JSON.stringify({op:1, d:null}))
-        }, d.heartbeat_interval)
-    }else if(op == 0&& t == "MESSAGE_CREATE"){
+    if(op == 0&& t == "MESSAGE_CREATE"){
         console.log(d.content)
         if(d.content == "ぴんぐ"){
             await fetch("https://discord.com/api/v10/channels/"+d.channel_id+"/messages", {
@@ -32,6 +29,10 @@ ws.onmessage = async function({data}){
                 "method": "POST"
             })
         }
+    }else if(op == 10){
+        setInterval(_=>{
+            ws.send(JSON.stringify({op:1, d:null}))
+        }, d.heartbeat_interval)
     }
 }
 
@@ -49,7 +50,7 @@ ws.onopen = function(){
           "status": "online", 
           "activities" : [
                 {
-                  "state": "さくら", 
+                  "name": "さくら", 
                   "type": 0
                 }
         ],
