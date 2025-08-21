@@ -31,17 +31,17 @@ jobs:
 # https://manual.sakura.ad.jp/api/cloud/apprun/#tag/アプリケーション/operation/postApplication
       - name: AppRunβのデプロイ
         run: |
-          curl
-          https://secure.sakura.ad.jp/cloud/api/apprun/1.0/apprun/api/applications/3c9f1ab1-b035-410a-9638-a8258825d375
-          - u ${{vars.SAKURA_ACCESS_TOKEN}}:${{secrets.SAKURA_ACCESS_TOKEN_SECRET}}
-          -X PATCH
-          -d {
-            "components": [
-              {"name": "bot", "max_cpu": 1, "max_memory": "2Gi", "deploy_source": {
-                "container_registry": {
-                  "image": "${{vars.SAKURA_REGISTRY}}/${{vars.CONTAINER_NAME}}:${{vars.CONTAINER_TAG}}","server": "${{secrets.SAKURA_REGISTRY}}","username": "${{ vars.SAKURA_USERNAME }}","password": "${{ secrets.PASSWORD }}"}}, "env": [
-                    {"key": "TOKEN", "value":  "${{ secrets.DISCORD_TOKEN }}" }
-                  ]
-             }
-            ]
-          }
+          curl \
+          https://secure.sakura.ad.jp/cloud/api/apprun/1.0/apprun/api/applications/3c9f1ab1-b035-410a-9638-a8258825d375 \
+          - u ${{vars.SAKURA_ACCESS_TOKEN}}:${{secrets.SAKURA_ACCESS_TOKEN_SECRET}} \
+          -X PATCH \
+          -d { \
+            "components": [ \
+              {"name": "bot", "max_cpu": 1, "max_memory": "2Gi", "deploy_source": { \
+                "container_registry": { \
+                  "image": "${{vars.SAKURA_REGISTRY}}/${{vars.CONTAINER_NAME}}:${{vars.CONTAINER_TAG}}","server": "${{secrets.SAKURA_REGISTRY}}","username": "${{ vars.SAKURA_USERNAME }}","password": "${{ secrets.PASSWORD }}"}}, "env": [ \
+                    {"key": "TOKEN", "value":  "${{ secrets.DISCORD_TOKEN }}" } \
+                  ] \
+             } \
+            ] \
+          } \
