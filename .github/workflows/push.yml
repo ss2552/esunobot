@@ -1,6 +1,8 @@
 name: App Run β デプロイ
 
 on:
+  push:
+    
   workflow_dispatch:
 
 permissions:

@@ -1,6 +1,9 @@
-FROM alpine:latest
+FROM node:latest
 
-WORKDIR /
-COPY src/index.js package.json
+WORKDIR /app
 
-CMD [ "ls && npm run start" ]
+COPY app .
+
+RUN npm install
+
+CMD [ "npm", "run", "start" ]
