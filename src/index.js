@@ -14,6 +14,7 @@ const ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json")
 ws.onmessage = async function({data}){
     const {op, d, s, t} = JSON.parse(data)
     if(op == 0&& t == "MESSAGE_CREATE"){
+        console.log(JSON.stringify(d))
         if(d.content == "ぴんぐ"){
             await fetch("https://discord.com/api/v10/channels/"+d.channel_id+"/messages", {
                 "headers": {
@@ -26,7 +27,7 @@ ws.onmessage = async function({data}){
                         message_id: d.id
                 }}),
                 "method": "POST"
-            })
+            }).then(async r => console.log(await r.json()))
         }
     }else if(op == 10){
         setInterval(_=>{
@@ -40,7 +41,7 @@ ws.onopen = function(){
         "op": 2, 
         "d": {
           "token": token, 
-          "intents": (1 << 9) | (1 << 12),
+          "intents": (1 << 9) | (1 << 12) | (1 << 15),
           "properties": {
             "os": "linux",  
             "device": "docker"
