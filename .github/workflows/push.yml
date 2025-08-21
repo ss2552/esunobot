@@ -1,8 +1,6 @@
 name: App Run β デプロイ
 
-on:
-  push:
-    
+on:    
   workflow_dispatch:
 
 permissions:
@@ -45,14 +43,14 @@ jobs:
                 "deploy_source": {
                   "container_registry": {
                     "image": "${{vars.SAKURA_REGISTRY}}/${{vars.CONTAINER_NAME}}:${{vars.CONTAINER_TAG}}",
-                    "server": "${{secrets.SAKURA_REGISTRY}}",
+                    "server": "${{vers.SAKURA_REGISTRY}}",
                     "username": "${{ vars.SAKURA_USERNAME }}",
                     "password": "${{ secrets.PASSWORD }}"
                   }
                 },
                 "env": [
-                  {"key": "TOKEN", "value": "${{ secrets.DISCORD_TOKEN }}" }
-                  {"key": "WEBHOOK", ${{secrets.DISCORD_WEBHOOK}}}
+                  {"key": "TOKEN", "value": "${{ secrets.DISCORD_TOKEN }}"},
+                  {"key": "WEBHOOK", "value": "${{secrets.DISCORD_WEBHOOK}}"}
                 ]
               }
             ]
