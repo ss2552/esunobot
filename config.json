@@ -13,16 +13,16 @@
         "container_registry": {
           "image": "bot",
           "server": "esunobot.sakuracr.jp/alpine:latest",
-          "username": ${{ secrets.USERNAME }},
-          "password": ${{ secrets.PASSWORD }}
+          "username": "${{ secrets.USERNAME }}",
+          "password": "${{ secrets.PASSWORD }}"
         }
-      }
+      },
       "env": [
-          {
-            "key": TOKEN,
-            "value":  ${{ secrets.TOKEN }}
-          }
-        ]
+        {
+          "key": "${{TOKEN}}",
+          "value":  "${{ secrets.TOKEN }}"
+        }
+      ],
       "probe": []
     }
   ]
