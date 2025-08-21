@@ -37,7 +37,7 @@ jobs:
           -d '{
             "components": [
               {
-                "name": "bot",
+                "name": "esunobot",
                 "max_cpu": "1",
                 "max_memory": "2Gi",
                 "deploy_source": {
